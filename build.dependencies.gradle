@@ -1,6 +1,7 @@
 repositories {
     mavenCentral()
     google() // Needed for androidx
+    maven { url 'https://brainstem-first.github.io/Brainstem-Pilot-UI/maven/' }
 }
 
 dependencies {
