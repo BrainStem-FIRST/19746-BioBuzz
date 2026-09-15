@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
  @Config
-    public class shooter {
+    public class Shooter {
         public static double kV = 0, kS = 0;
         public static double kP = 0, kI = 0, kD = 0;
 
@@ -24,7 +24,7 @@ import com.arcrobotics.ftclib.controller.PIDController;
         private double targetPower;
         private double targetVelocity;
 
-        public shooter(HardwareMap hardwareMap, Telemetry telemetry) {
+        public Shooter(HardwareMap hardwareMap, Telemetry telemetry) {
             this.telemetry = telemetry;
             shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter");
             pid = new PIDController(kP, kI, kD);
