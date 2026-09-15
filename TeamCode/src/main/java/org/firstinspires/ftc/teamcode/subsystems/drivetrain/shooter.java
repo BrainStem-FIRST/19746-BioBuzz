@@ -26,7 +26,7 @@ import com.arcrobotics.ftclib.controller.PIDController;
 
         public shooter(HardwareMap hardwareMap, Telemetry telemetry) {
             this.telemetry = telemetry;
-            shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter"); // the string name will vary based on your hardware map config
+            shooterMotor = hardwareMap.get(DcMotorEx.class, "shooter");
             pid = new PIDController(kP, kI, kD);
             setShooterState(ShooterState.OFF);
         }
