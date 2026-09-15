@@ -50,9 +50,9 @@ public class Teleop extends LinearOpMode {
     }
 
     private void updateDriver1() {
-        if (gamepad2.right_trigger > 0.1) {
+        if (gamepad1.right_trigger > 0.1) {
             collector.setCollectorState(Collector.CollectorState.INTAKE);
-        } else if (gamepad2.left_trigger > 0.1) {
+        } else if (gamepad1.left_trigger > 0.1) {
             collector.setCollectorState(Collector.CollectorState.EXTAKE);
         } else {
             collector.setCollectorState(Collector.CollectorState.OFF);
