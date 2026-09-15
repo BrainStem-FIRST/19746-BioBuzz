@@ -11,11 +11,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.BrainSTEMRobot;
+import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Collector;
 
 @TeleOp(name="Teleop")
 public class Teleop extends LinearOpMode {
     private final Pose2d initialPose = new Pose2d(0, 0, 0);
     private BrainSTEMRobot robot;
+    private Collector collector;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,6 +27,7 @@ public class Teleop extends LinearOpMode {
         telemetry.setMsTransmissionInterval(20);
 
         robot = new BrainSTEMRobot(hardwareMap, telemetry, initialPose);
+        collector = new Collector(hardwareMap, telemetry);
 
         waitForStart();
 
@@ -33,17 +36,30 @@ public class Teleop extends LinearOpMode {
             updateDriver1();
             updateDriver2();
             robot.update();
+            collector.update();
             panelsTelemetry.update(dashboardAndDs);
         }
+
     }
 
     private void updateDrive() {
         robot.drive.setDrivePowers(new PoseVelocity2d(
-            new Vector2d(-gamepad1.left_stick_y, gamepad1.left_stick_x),
-            -gamepad1.right_stick_x)
+                new Vector2d(-gamepad1.left_stick_y, gamepad1.left_stick_x),
+                -gamepad1.right_stick_x)
         );
     }
 
-    private void updateDriver1() {}
-    private void updateDriver2() {}
+    private void updateDriver1() {
+        if (gamepad2.right_trigger > 0.1) {
+            collector.setCollectorState(Collector.CollectorState.INTAKE);
+        } else if (gamepad2.left_trigger > 0.1) {
+            collector.setCollectorState(Collector.CollectorState.EXTAKE);
+        } else {
+            collector.setCollectorState(Collector.CollectorState.OFF);
+        }
+    }
+
+    private void updateDriver2() {
+
+    }
 }
